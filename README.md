@@ -58,12 +58,12 @@ jobs:
           PATH_TO_HASURA_PROJECT_ROOT: ./hasura
           HASURA_CLI_VERSION: v1.3.1-beta.1
           HASURA_ENDPOINT: https://my-url.hasura.app
-          HASURA_ADMIN_SECRET: test
+          HASURA_ADMIN_SECRET: ${{ secrets.HASURA_ADMIN_SECRET }}
           # If you want to disable either migrations or regression tests, make sure to remove them completely
           # The script only checks for their presence, not their value
           HASURA_MIGRATIONS_ENABLED: true
           HASURA_REGRESSION_TESTS_ENABLED: true
           HASURA_REGRESSION_TESTSUITE_ID: xxxxxx-xxx-xxxx-xxxxx-xxxxxx
-          HASURA_PERSONAL_ACCESS_TOKEN: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+          HASURA_PERSONAL_ACCESS_TOKEN: ${{ secrets.HASURA_PERSONAL_ACCESS_TOKEN }}
           HASURA_PROJECT_ID: xxxxxx-xxxx-xxx-xxxx-xxxxxxx
 ```
