@@ -1,7 +1,5 @@
 #!/bin/bash
 
-echo "Starting!"
-
 # If a CLI version was given to Github Action inputs, then use that, otherwise default to latest release
 if [[ -z "$INPUT_HASURA_CLI_VERSION" ]]; then
   hasura_cli_download_url="https://github.com/hasura/graphql-engine/releases/latest/download/cli-hasura-linux-amd64"
