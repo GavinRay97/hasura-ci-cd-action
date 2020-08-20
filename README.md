@@ -2,6 +2,8 @@
 
 This action allows automatically running migrations and regression tests against a Hasura instance on changes.
 
+The functionality lives inside of `entrypoint.sh` as a single bash script and is well-commented for those curious.
+
 ## Inputs
 
 ```yaml
