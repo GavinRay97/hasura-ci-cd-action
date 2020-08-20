@@ -18,6 +18,9 @@ inputs:
   HASURA_ADMIN_SECRET:
     required: false
     description: Optional overriding admin secret for the Hasura instance. Will default to config.yaml value (as the CLI is run from the directory containing config.yaml).
+  HASURA_MIGRATIONS_ENABLED:
+    required: false
+    description: Whether or not migrations should be run during CI/CD.
   HASURA_REGRESSION_TESTS_ENABLED:
     required: false
     description: Whether or not the CI/CD should attempt to run regression tests. Only available for Hasura Cloud and Hasura Enterprise users.
