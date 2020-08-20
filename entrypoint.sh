@@ -36,7 +36,7 @@ if [[ -n "$INPUT_HASURA_MIGRATIONS_ENABLED" ]]; then
       exit 1
     }
   else
-    hasura migrate apply --endpoint "$INPUT_HASURA_ENDPOINT" || {
+    hasura migrate apply --admin-secret "$INPUT_HASURA_ADMIN_SECRET" || {
       echo "Failed applying migrations"
       exit 1
     }
