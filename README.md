@@ -53,7 +53,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Hasura CI/CD
-        uses: GavinRay97/hasura-ci-cd-action@v1.2
+        uses: GavinRay97/hasura-ci-cd-action@v1.3
         with:
           PATH_TO_HASURA_PROJECT_ROOT: ./hasura
           HASURA_CLI_VERSION: v1.3.1-beta.1
