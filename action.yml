@@ -17,6 +17,9 @@ inputs:
   HASURA_MIGRATIONS_ENABLED:
     required: false
     description: Whether or not migrations should be run during CI/CD.
+  HASURA_SEEDS_ENABLED:
+    required: false
+    description: Whether or not seeds should be run during CI/CD.
   HASURA_REGRESSION_TESTS_ENABLED:
     required: false
     description: Whether or not the CI/CD should attempt to run regression tests. Only available for Hasura Cloud and Hasura Enterprise users.

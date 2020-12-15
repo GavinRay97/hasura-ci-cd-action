@@ -62,6 +62,7 @@ jobs:
           # If you want to disable either migrations or regression tests, make sure to remove them completely
           # The script only checks for their presence, not their value
           HASURA_MIGRATIONS_ENABLED: true
+          HASURA_SEEDS_ENABLED: true
           HASURA_REGRESSION_TESTS_ENABLED: true
           HASURA_REGRESSION_TESTSUITE_ID: xxxxxx-xxx-xxxx-xxxxx-xxxxxx
           HASURA_PERSONAL_ACCESS_TOKEN: ${{ secrets.HASURA_PERSONAL_ACCESS_TOKEN }}

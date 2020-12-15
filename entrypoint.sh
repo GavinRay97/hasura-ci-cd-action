@@ -92,6 +92,26 @@ else
   warn "Migrations not enabled, skipping"
 fi
 
+if [ -n "$INPUT_HASURA_SEEDS_ENABLED" ]; then
+  debug "Preparing to apply seeds"
+  # If admin secret given in inputs, append it to migrate apply, else don't (use default from config.yaml)
+  if [ -n "$INPUT_HASURA_ENDPOINT" ]; then
+    debug "Applying seeds:"
+    hasura seeds apply --endpoint "$INPUT_HASURA_ENDPOINT" --admin-secret "$INPUT_HASURA_ADMIN_SECRET" || {
+      error "Failed getting migration status"
+      exit 1
+    }
+  else
+    debug "Applying seeds:"
+    hasura seeds apply --admin-secret "$INPUT_HASURA_ADMIN_SECRET" || {
+      error "Failed getting migration status"
+      exit 1
+    }
+  fi
+else
+  warn "Seeds not enabled, skipping"
+fi
+
 # If regression tests not enabled, end things here
 if [ -z "$INPUT_HASURA_REGRESSION_TESTS_ENABLED" ]; then
   debug "Regression tests not enabled, finished."
