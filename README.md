@@ -4,6 +4,8 @@ This action allows automatically running migrations and regression tests against
 
 The functionality lives inside of `entrypoint.sh` as a single bash script and is well-commented for those curious.
 
+Currently only works with a single database tagged as `default` in your metadata
+
 ## Inputs
 
 ```yaml
@@ -56,7 +58,7 @@ jobs:
         uses: GavinRay97/hasura-ci-cd-action@v1.3
         with:
           PATH_TO_HASURA_PROJECT_ROOT: ./hasura
-          HASURA_CLI_VERSION: v1.3.1-beta.1
+          HASURA_CLI_VERSION: v2.0.0-alpha.2
           HASURA_ENDPOINT: https://my-url.hasura.app
           HASURA_ADMIN_SECRET: ${{ secrets.HASURA_ADMIN_SECRET }}
           # If you want to disable either migrations or regression tests, make sure to remove them completely

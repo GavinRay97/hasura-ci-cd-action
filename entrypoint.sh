@@ -56,37 +56,39 @@ if [ -n "$INPUT_HASURA_MIGRATIONS_ENABLED" ]; then
   debug "Preparing to apply migrations and metadata"
   # If admin secret given in inputs, append it to migrate apply, else don't (use default from config.yaml)
   if [ -n "$INPUT_HASURA_ENDPOINT" ]; then
-    debug "Migration status:"
-    hasura migrate status --endpoint "$INPUT_HASURA_ENDPOINT" --admin-secret "$INPUT_HASURA_ADMIN_SECRET" || {
-      error "Failed getting migration status"
-      exit 1
-    }
-    debug "Applying migrations"
-    hasura migrate apply --endpoint "$INPUT_HASURA_ENDPOINT" --admin-secret "$INPUT_HASURA_ADMIN_SECRET" || {
-      error "Failed applying migrations"
-      exit 1
-    }
     debug "Applying metadata"
     hasura metadata apply --endpoint "$INPUT_HASURA_ENDPOINT" --admin-secret "$INPUT_HASURA_ADMIN_SECRET" || {
       error "Failed applying migrations"
       exit 1
     }
-  else
-    debug "Migration status:"
-    hasura migrate status --admin-secret "$INPUT_HASURA_ADMIN_SECRET" || {
-      error "Failed getting migration status"
-      exit 1
-    }
     debug "Applying migrations"
-    hasura migrate apply --admin-secret "$INPUT_HASURA_ADMIN_SECRET" || {
+    hasura migrate apply --endpoint "$INPUT_HASURA_ENDPOINT" --admin-secret "$INPUT_HASURA_ADMIN_SECRET" --database "default" || {
       error "Failed applying migrations"
       exit 1
     }
+    debug "Reload metadata"
+    hasura metadata reload --endpoint "$INPUT_HASURA_ENDPOINT" --admin-secret "$INPUT_HASURA_ADMIN_SECRET" || {
+      error "Failed reload migrations"
+      exit 1
+    }
+
+  else
     debug "Applying metadata"
     hasura metadata apply --admin-secret "$INPUT_HASURA_ADMIN_SECRET" || {
       error "Failed applying migrations"
       exit 1
     }
+    debug "Applying migrations"
+    hasura migrate apply --admin-secret "$INPUT_HASURA_ADMIN_SECRET" --database "default" || {
+      error "Failed applying migrations"
+      exit 1
+    }
+    debug "Reload metadata"
+    hasura metadata reload --admin-secret "$INPUT_HASURA_ADMIN_SECRET" || {
+      error "Failed reload migrations"
+      exit 1
+    }
+    
   fi
 else
   warn "Migrations not enabled, skipping"
