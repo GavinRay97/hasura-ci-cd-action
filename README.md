@@ -4,6 +4,8 @@ This action allows automatically running migrations and regression tests against
 
 The functionality lives inside of `entrypoint.sh` as a single bash script and is well-commented for those curious.
 
+Currently only works with a single database tagged as `default` in your metadata
+
 ## Inputs
 
 ```yaml
