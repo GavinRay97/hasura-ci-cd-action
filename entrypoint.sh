@@ -79,7 +79,7 @@ if [ -n "$INPUT_HASURA_MIGRATIONS_ENABLED" ]; then
       exit 1
     }
     debug "Applying migrations"
-    hasura migrate apply --database default --admin-secret "$INPUT_HASURA_ADMIN_SECRET" || {
+    hasura migrate apply --admin-secret "$INPUT_HASURA_ADMIN_SECRET" --database "default" || {
       error "Failed applying migrations"
       exit 1
     }
