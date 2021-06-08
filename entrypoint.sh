@@ -62,7 +62,7 @@ if [ -n "$INPUT_HASURA_MIGRATIONS_ENABLED" ]; then
       exit 1
     }
     debug "Applying migrations"
-    hasura migrate apply --endpoint "$INPUT_HASURA_ENDPOINT" --admin-secret "$INPUT_HASURA_ADMIN_SECRET" --database "default" || {
+    hasura migrate apply --endpoint "$INPUT_HASURA_ENDPOINT" --admin-secret "$INPUT_HASURA_ADMIN_SECRET" --database "default" --database-name "default" || {
       error "Failed applying migrations"
       exit 1
     }
@@ -79,7 +79,7 @@ if [ -n "$INPUT_HASURA_MIGRATIONS_ENABLED" ]; then
       exit 1
     }
     debug "Applying migrations"
-    hasura migrate apply --admin-secret "$INPUT_HASURA_ADMIN_SECRET" --database "default" || {
+    hasura migrate apply --admin-secret "$INPUT_HASURA_ADMIN_SECRET" --database "default" --database-name "default" || {
       error "Failed applying migrations"
       exit 1
     }
@@ -99,13 +99,13 @@ if [ -n "$INPUT_HASURA_SEEDS_ENABLED" ]; then
   # If admin secret given in inputs, append it to migrate apply, else don't (use default from config.yaml)
   if [ -n "$INPUT_HASURA_ENDPOINT" ]; then
     debug "Applying seeds:"
-    hasura seeds apply --endpoint "$INPUT_HASURA_ENDPOINT" --admin-secret "$INPUT_HASURA_ADMIN_SECRET" || {
+    hasura seeds apply --endpoint "$INPUT_HASURA_ENDPOINT" --admin-secret "$INPUT_HASURA_ADMIN_SECRET" --database-name "default" || {
       error "Failed getting migration status"
       exit 1
     }
   else
     debug "Applying seeds:"
-    hasura seeds apply --admin-secret "$INPUT_HASURA_ADMIN_SECRET" || {
+    hasura seeds apply --admin-secret "$INPUT_HASURA_ADMIN_SECRET" --database-name "default" || {
       error "Failed getting migration status"
       exit 1
     }
