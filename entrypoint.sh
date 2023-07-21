@@ -17,19 +17,6 @@ error() {
   printf "❌ ${RED}%s${NC}\n", "$1"
 }
 
-# Download the Hasura CLI binary
-(curl -L https://github.com/hasura/graphql-engine/raw/stable/cli/get.sh | bash) || {
-  error 'Failed downloading Hasura CLI'
-  exit 1
-}
-
-debug "Making Hasura CLI executable"
-# Make it executable
-chmod +x /usr/local/bin/hasura || {
-  error 'Failed making CLI executable'
-  exit 1
-}
-
 # If regression tests not enabled, end things here
 if [ -z "$INPUT_HASURA_REGRESSION_TESTS_ENABLED" ]; then
   debug "Regression tests not enabled, finished."
@@ -43,14 +30,6 @@ echo "pat: $INPUT_HASURA_PERSONAL_ACCESS_TOKEN" >>~/.hasura/pro_config.yaml || {
   error "Failed writing Pro personal access token to ~/.hasura/pro_config.yaml"
   exit 1
 }
-
-debug "Installing Hasura CLI Pro plugin"
-# Install the Pro CLI plugin
-hasura plugins install pro || {
-  error "Failed installing Pro CLI plugin"
-  exit 1
-}
-
 debug "Running regression tests"
 # Run regression tests
 hasura pro regression-tests run \
