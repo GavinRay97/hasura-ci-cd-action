@@ -122,6 +122,7 @@ fi
 
 debug "Writing personal access token to config file"
 # Write Personal Access Token to config file in home directory for Pro CLI plugin
+mkdir -p ~/.hasura
 echo "pat: $INPUT_HASURA_PERSONAL_ACCESS_TOKEN" >>~/.hasura/pro_config.yaml || {
   error "Failed writing Pro personal access token to ~/.hasura/config.yaml"
   exit 1
