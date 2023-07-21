@@ -32,7 +32,7 @@ echo "pat: $INPUT_HASURA_PERSONAL_ACCESS_TOKEN" >>~/.hasura/pro_config.yaml || {
 }
 debug "Running regression tests"
 # Run regression tests
-hasura-cli pro regression-tests run \
+hasura pro regression-tests run \
   --endpoint "$INPUT_HASURA_ENDPOINT" \
   --admin-secret "$INPUT_HASURA_ADMIN_SECRET" \
   --project-id "$INPUT_HASURA_PROJECT_ID" \

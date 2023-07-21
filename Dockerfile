@@ -1,8 +1,9 @@
 # Use alpine-glibc because Hasura CLI ext is not compatible with muslc. Needs glibc and libstdc++.
 FROM hasura/graphql-engine:latest.cli-migrations
 
-RUN hasura-cli plugins list
-RUN hasura-cli plugins install pro
+RUN curl -L https://github.com/hasura/graphql-engine/raw/stable/cli/get.sh | bash
+RUN hasura plugins list
+RUN hasura plugins install pro
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
